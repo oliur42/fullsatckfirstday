@@ -58,9 +58,9 @@ function Form() {
     };
 
     // Delete data
-    const deleteData = async (id) => {
+    const deleteData = async (_id) => {
         try {
-            const res = await fetch(`http://localhost:3005/api/v1/form/${id}`, {
+            const res = await fetch(`http://localhost:3005/api/v1/form/${_id}`, {
                 method: 'DELETE',
             });
             if (res.ok) {
@@ -111,7 +111,7 @@ function Form() {
     useEffect(() => {
         fetchData();
     }, []);
-
+    console.log(item)
     return (
         <div className="w-full max-w-6xl mx-auto p-4">
             <h1 className="text-2xl font-bold mb-6 text-center">
@@ -213,22 +213,22 @@ function Form() {
                     </thead>
                     <tbody>
                         {item.length > 0 ? (
-                            item.map((form) => (
-                                <tr key={form._id} className="hover:bg-gray-50">
-                                    <td className="border p-2">{form.firstName}</td>
-                                    <td className="border p-2">{form.lastName}</td>
-                                    <td className="border p-2">{form.presentAdress}</td>
-                                    <td className="border p-2">{form.mobileNumber}</td>
-                                    <td className="border p-2">{form.contact}</td>
+                            item.map((element) => (
+                                <tr key={element._id} className="hover:bg-gray-50">
+                                    <td className="border p-2">{element.firstName}</td>
+                                    <td className="border p-2">{element.lastName}</td>
+                                    <td className="border p-2">{element.presentAdress}</td>
+                                    <td className="border p-2">{element.mobileNumber}</td>
+                                    <td className="border p-2">{element.contact}</td>
                                     <td className="border p-2 flex gap-2">
                                         <button
-                                            onClick={() => handleEdit(form)}
+                                            onClick={() => handleEdit(element)}
                                             className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                                         >
                                             Edit
                                         </button>
                                         <button
-                                            onClick={() => deleteData(form._id)}
+                                            onClick={() => deleteData(element._id)}
                                             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                                         >
                                             Delete
